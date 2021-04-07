@@ -1,8 +1,12 @@
 %%  Basics
+%------------ EXTRAS
 %pwd %gives the current working directory
 %cd C:\\ %goes to a different working directory
-%clear %clear the variables in the workspace
-%clc %clears the command window
+%lookfor inverse %search for a command
+%help inv %gives the manual page for a command
+%------------
+clear %clear the variables in the workspace
+clc %clears the command window
 
 A = [1 2 3; 4 5 6; 7 8 9]
 B = [2 2 3; 2 3 2; 3 2 2]
@@ -11,8 +15,7 @@ A .* B %multiplies each one
 A ./ B %divides each one
 A * B %normal matrix multiplication
 
-lookfor inverse %search for a command
-help inv %gives the manual page for a command
+
 
 C = transpose(A) %transposed matrix
 inverse = inv(A)
