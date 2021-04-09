@@ -8,17 +8,17 @@
 clear %clear the variables in the workspace
 clc %clears the command window
 
-A = [1 2 3; 4 5 6; 7 8 9]
-B = [2 2 3; 2 3 2; 3 2 2]
+A = [1 2 3; 4 5 6; 7 8 9];
+B = [2 2 3; 2 3 2; 3 2 2];
 
-A .* B %multiplies each one
-A ./ B %divides each one
-A * B %normal matrix multiplication
+A .* B; %multiplies each one
+A ./ B; %divides each one
+A * B; %normal matrix multiplication
 
 
 
-C = transpose(A) %transposed matrix
-inverse = inv(A)
+C = transpose(A); %transposed matrix
+inverse = inv(A);
 
 %whos %info on the workspace
 
@@ -26,10 +26,10 @@ inverse = inv(A)
 clc
 clear
 
-A = [1 2 3; 4 5 6; 7 8 9] 
+A = [1 2 3; 4 5 6; 7 8 9]; 
 A(2,3) %second row, third column
-z = A(:,1)
-z2 = A(2, :)
+z = A(:,1);
+z2 = A(2, :);
 
 %% Search by index
 clc
