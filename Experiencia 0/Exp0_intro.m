@@ -97,4 +97,11 @@ clc
 clear
 SumaMia(2,3)
 
+%% Added test function
+clc
+clear
+2+2;
+C = 2+2;
+
+
 
