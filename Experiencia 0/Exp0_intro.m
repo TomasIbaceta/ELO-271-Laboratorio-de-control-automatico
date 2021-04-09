@@ -81,15 +81,15 @@ for t=1:10
     t = t+t;
 end
 
-k = 0
-if k==1
-    k=2
+i = 0
+if i==1
+    i=2
 else
-    k=3
+    i=4
 end
 
-while k < 10
-    k = k+1
+while i < 10
+    i = i+1
 end
 
 %% Use of function
