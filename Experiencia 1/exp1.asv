@@ -53,9 +53,9 @@ phi = [ones(length(y_k),1) u1_k u2_k.^2];
 
 Theta = vpa(pinv(phi) * y_k); %para usar mas decimales %metodo usando pinv
 
-a0_ls = Theta(1,1)
-a1_ls = Theta(2,1)
-a2_ls = Theta(3,1)
+a0_ls = Theta(1,1);
+a1_ls = Theta(2,1);
+a2_ls = Theta(3,1);
 
 %% Actividad 3: 
 clc
@@ -63,24 +63,23 @@ clear
 %datos para la entrada de simulink
 a1 = 2;
 a2 = 1;
-out = sim('act3_euler');
+out = sim('\act3_sim\act3_euler'); %run the simulation
 %datos de salida de simulink
 y1_euler = out.y_1;
 y2_euler = out.y_2;
 
-out2 = sim('act3_runge_kutta');
+out2 = sim('\act3_sim\act3_runge_kutta'); %run the simulation
 y1_RK4 = out2.y_1;
 y2_RK4 = out2.y_2;
 
 % plot(y2_euler)
 % hold on
-% plot (y2_RK4)
+% plot (y2_runge_kutta)
 
-%---------------
 %codigos para comparar si son iguales y distintos
 y1_check = y1_euler - y1_RK4;
 y2_check = y2_euler - y2_RK4;
-
+%---------------
 if any(y1_check ~= 0)
     sprintf("los dos métodos para y1 dan resultados distintos")
 else
