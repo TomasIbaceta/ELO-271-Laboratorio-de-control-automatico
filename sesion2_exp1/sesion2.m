@@ -12,8 +12,8 @@ a=1; b=1;
 out = sim('sesion2_act1'); %run the simulation
 
 %take the variables from the workspace
-tf=out.tf; 
-dif=out.dif;
+tf=out.tf;      %salida transfer function.
+dif=out.dif;    %salida ec. diferencial
 
 t_len=10; %tiempo de simulación
 
@@ -25,14 +25,14 @@ h=heaviside(t-1);
 
 %plot(t,h)
 
-expr=(b/a)*(h.*(1-exp(-1*a*(t-1))));
+expr=(b/a)*(h.*(1-exp(-1*a*(t-1))));  %expresión analitica
 
-% plot(t,expr)
-% hold on
-% plot(t,dif)
-% plot(t,tf)
+ plot(t,expr)
+ hold on
+ plot(t,dif)
+ legend('Expresión Analítica','Método Euler')
 
-E=immse(expr, tf.')
+E=immse(expr, tf.');
 
 
 % para a=b=1   -> E = 6.2530e-09 
@@ -40,9 +40,16 @@ E=immse(expr, tf.')
 %      a=b=100 -> E = 6.6396e-07
 
 
+
+
 %% 
+
+
 clc
 clear
+
+
+
 
 s=tf('s');
 
@@ -52,12 +59,29 @@ b1 = [0, 0, 0, 0, 0];
 b0 = [1, 1, 1, 1, 1];
 
 G_c = @(x) (b1(x)*s+b0(x))/(s^2+a1(x)*s+a0(x));
+%%act 2.2
+subplot(2,1,1)
+hold on
+plot( impulse(G_c(1)))
+plot( impulse(G_c(2)))
+legend('G_c (1)', 'G_c(2)')
+subplot(2,1,2)
+hold on
+plot( impulse(G_c(3)) )
+plot( impulse(G_c(4)) )
+legend('G_c (3)', 'G_c(4)')
+datos={};
 
 for i = [1 : length(a1) ]
-    G_c(i);
+    %2.3
     subplot(3,2,i);
     plot(step(G_c(i)))
-   
+    
+    %2.4 
+     datos=horzcat(datos,stepinfo(G_c(i)));    
+
+
+   %2.1
     disp(i)
     P=pole(G_c(i));
     Z=zero(G_c(i));
@@ -70,15 +94,5 @@ end
 
 
 %------------------
-%act 2.2
 
-subplot(2,1,1)
-hold on
-plot( impulse(G_c(1)))
-plot( impulse(G_c(2)))
-legend('G_c (1)', 'G_c(2)')
-subplot(2,1,2)
-hold on
-plot( impulse(G_c(3)) )
-plot( impulse(G_c(4)) )
-legend('G_c (3)', 'G_c(4)')
+
