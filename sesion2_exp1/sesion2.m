@@ -93,6 +93,48 @@ for i = [1 : length(a1) ]
 end
 
 
-%------------------
+
+%resp en freq
+%%
+t1=linspace(0,30,30001);
+
+
+bode(G_c(1))
+
+
+% % % u1=10*(3/(s^2+3^2));
+% % % u2=10+10*(3/(s^2+3^2));
+% % % u3=10*(10/(s^2+10^2));
+
+
+
+%------------------entrada1
+[A1,B1]=freqresp(G_c(1),3)
+
+
+u1abs=abs(A1);
+u1fase=angle(A1);
+
+%Yest=10*u1abs*sin(3*t+u1fase)
+
+%------------------entrada 2
+
+[A2,B2]=freqresp(G_c(1),0);
+u2abs=abs(A2);
+u2fase=angle(A2);
+
+%Yest=10( u2abs*sin(u2fase)  +  u1abs*sin(3*t+u1fase))
+
+
+%------------------caso 3
+
+[A3,B3]=freqresp(G_c(1),10);
+u3abs=abs(A3);
+u3fase=angle(A3);
+%Yest=10*u3abs*sin(10*t+u3fase)
+
+
+
+
 
 
