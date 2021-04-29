@@ -43,14 +43,8 @@ E=immse(expr, tf.');
 
 
 %% 
-
-
 clc
 clear
-
-
-
-
 s=tf('s');
 
 a1 = [2*0.7*1, 2*0.3*1, 2*0.7*10, 2*0.3*10, 2*0.7*1];
@@ -65,76 +59,68 @@ hold on
 plot( impulse(G_c(1)))
 plot( impulse(G_c(2)))
 legend('G_c (1)', 'G_c(2)')
+
 subplot(2,1,2)
 hold on
 plot( impulse(G_c(3)) )
 plot( impulse(G_c(4)) )
 legend('G_c (3)', 'G_c(4)')
-datos={};
+datos={0,0,0,0,0}; %Saves the output characteristics, is preallocated for extra speed
 
-for i = [1 : length(a1) ]
-    %2.3
-    subplot(3,2,i);
-    plot(step(G_c(i)))
-    
-    %2.4 
-     datos=horzcat(datos,stepinfo(G_c(i)));    
-
-
-   %2.1
-    disp(i)
-    P=pole(G_c(i));
-    Z=zero(G_c(i));
-    disp("Polos en: ")
-    disp(P)
-    disp("Ceros en: ")
-    disp(Z)
-    disp("------------------------")
-end
-
+% for i = [1 : length(a1) ]
+%     %2.3
+%     subplot(3,2,i);
+%     plot(step(G_c(i)))
+%     
+%     %2.4 
+%      datos=horzcat(datos,stepinfo(G_c(i)));    
+% 
+%    %2.1
+%     disp(i)
+%     P=pole(G_c(i));
+%     Z=zero(G_c(i));
+%     disp("Polos en: ");
+%     disp(P);
+%     disp("Ceros en: ");
+%     disp(Z);
+%     disp("------------------------");
+% end
 
 
-%resp en freq
-%%
+
+%-------------respuesta en frecuencia
+
 t1=linspace(0,30,30001);
 
-
-bode(G_c(1))
-
+bode(G_c(1));
 
 % % % u1=10*(3/(s^2+3^2));
 % % % u2=10+10*(3/(s^2+3^2));
 % % % u3=10*(10/(s^2+10^2));
 
-
-
-%------------------entrada1
+%------------------entrada 1
 [A1,B1]=freqresp(G_c(1),3)
-
-
-u1abs=abs(A1);
-u1fase=angle(A1);
-
-%Yest=10*u1abs*sin(3*t+u1fase)
-
+u1abs=abs(A1); u1fase=angle(A1); %
+y_m_1=10*u1abs*sin(3*t1+u1fase); %stationary output of the system
 %------------------entrada 2
-
 [A2,B2]=freqresp(G_c(1),0);
-u2abs=abs(A2);
-u2fase=angle(A2);
-
+u2abs=abs(A2); u2fase=angle(A2);
 %Yest=10( u2abs*sin(u2fase)  +  u1abs*sin(3*t+u1fase))
-
-
-%------------------caso 3
-
+%------------------entrada 3
 [A3,B3]=freqresp(G_c(1),10);
-u3abs=abs(A3);
-u3fase=angle(A3);
+u3abs=abs(A3); u3fase=angle(A3);
 %Yest=10*u3abs*sin(10*t+u3fase)
 
+sys = G_c(1);
+out = sim('sesion2_act2'); %run the simulation
 
+y1 = out.y1;
+y2 = out.y2;
+y3 = out.y3;
 
-
-
+figure(2)
+plot(t1,y1)
+hold on
+plot(t1,y_m_1)
+legend("y1sim", "ym1")
 
