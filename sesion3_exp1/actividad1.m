@@ -1,75 +1,83 @@
 clc
 clear
 
-
+Ts=[0.51 0.5 0.49 0.1];
 out = sim('actividad1simulink');
 
-Ts2=0.51;
-Ts3=0.5;
-Ts4=0.49;
-Ts5=0.1;
 
-t2=1000*[0:Ts2:3];   %%%%ese 1000 es por el largo del vector tiempo, cuando usemos 30 o 30000 hay que cambiarlo.
-t3=1000*[0:Ts3:3];
-t4=1000*[0:Ts4:3];
-t5=1000*[0:Ts5:3];
-%sacado de simulink
 Ym1=out.simout1; 
-Ym2=out.simout2;
-Ym3=out.simout3;
-Ym4=out.simout4;
-Ym5=out.simout5;
 t=out.tout;
-%
-Yr2=reconstruccion(Ts2,t,Ym2);
-Yr3=reconstruccion(Ts3,t,Ym3);
-Yr4=reconstruccion(Ts4,t,Ym4);
-Yr5=reconstruccion(Ts5,t,Ym5);
-%
-%hacer los plots lol
-subplot(2,2,1)
-hold on
-title('Tiempo de Muestreo 0.51')
-plot(Ym1)
-stem(t2,Ym2)
-plot(Yr2)
-hold off
-subplot(2,2,2)
-hold on
-title('Tiempo de Muestreo 0.50')
-plot(Ym1)
-stem(t3,Ym3)
-plot(Yr3)
-hold off
-subplot(2,2,3)
-hold on
-title('Tiempo de Muestreo 0.49')
-plot(Ym1)
-stem(t4,Ym4)
-plot(Yr4)
-hold off
-subplot(2,2,4)
-title('Tiempo de Muestreo 0.1')
-hold on
-plot(Ym1)
-stem(t5,Ym5)
-plot(Yr5)
-hold off
+Ym={out.simout2;
+    out.simout3;
+    out.simout4;
+    out.simout5};
+
+
+Yr={};
+for i=[1:4]
+    Yr=vertcat(Yr,reconstruccion(Ts(i),t,Ym{i}.data))
+    subplot(2,2,i)
+    titulo='Tiempo de muestreo: ' + string(Ts(i));
+    hold on
+    title(titulo)
+    plot(Ym1.time,Ym1.data)
+    stem(Ym{i}.time,Ym{i}.data)
+    plot(t,Yr{i})
+    hold off
+end
+
 %%
 clc
 clear
 
 out = sim('actividad1_2simulink');
-Yr=out.simout;
-Ym1=out.simout1;
-Ym2=out.simout2;
-Ym3=out.simout3;
-Ym4=out.simout4;
-Ym5=out.simout5;
-Ym6=out.simout6;
-
+Ts=[0.75 0.5 0.2 0.1 0.05 0.01];
+Yreal=out.simout;
+Ym={out.simout1;
+    out.simout2;
+    out.simout3;
+    out.simout4;
+    out.simout5;
+    out.simout6}; 
 t=out.tout;
 
+
+figure
+for i=[1:6]
+    titulo='Tiempo de muestreo: ' + string(Ts(i)) + '[s]';
+    subplot(2,3,i)
+    hold on
+    title(titulo)
+    plot(Yreal)
+    stairs(Ym{i}.time,Ym{i}.data)
+    hold off
+end
+
+%%
+clc
+clear
+
+out = sim('actividad1_22simulink');
+Ts=[0.75 0.5 0.2 0.1 0.05 0.01];
+Yreal=out.simout;
+Ym={out.simout1;
+    out.simout2;
+    out.simout3;
+    out.simout4;
+    out.simout5;
+    out.simout6}; 
+t=out.tout;
+figure
+for i=[1:6]
+    titulo='Tiempo de muestreo: ' + string(Ts(i)) + '[s]';
+    subplot(2,3,i)
+    hold on
+    title(titulo)
+    plot(Yreal)
+    plot(Ym{i}.time,Ym{i}.data)
+    
+    hold off
+end
 
 
 
