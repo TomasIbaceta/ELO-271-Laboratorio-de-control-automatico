@@ -32,11 +32,15 @@ Vi=out.Vi;
 for i=[1:6]
     subplot(6,2,2*i-1)
     hold on
+    titulo='Voltaje salida v/s Voltaje salida luego de ser muestreado a:' + string(Ts(i)) + '[s]' ;
     plot(Vo.time,Vo.data)
     stairs(Vof{i}.time,Vof{i}.data)
+    title(titulo)
     hold off
     subplot(6,2,2*i)
+    titulo2='Voltaje de entrada v/s Voltaje muestreado a:' + string(Ts(i)) + '[s]';
     hold on
+    title(titulo2)
     plot(Vi.time,Vi.data)
     stem(Vinm{i}.time,Vinm{i}.data)
     hold off
