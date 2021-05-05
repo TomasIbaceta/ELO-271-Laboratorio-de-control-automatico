@@ -9,7 +9,7 @@ Ts3=0.5;
 Ts4=0.49;
 Ts5=0.1;
 
-t2=1000*[0:Ts2:3];
+t2=1000*[0:Ts2:3];   %%%%ese 1000 es por el largo del vector tiempo, cuando usemos 30 o 30000 hay que cambiarlo.
 t3=1000*[0:Ts3:3];
 t4=1000*[0:Ts4:3];
 t5=1000*[0:Ts5:3];
@@ -55,4 +55,32 @@ plot(Ym1)
 stem(t5,Ym5)
 plot(Yr5)
 hold off
+%%
+clc
+clear
+
+out = sim('actividad1_2simulink');
+Yr=out.simout;
+Ym1=out.simout1;
+Ym2=out.simout2;
+Ym3=out.simout3;
+Ym4=out.simout4;
+Ym5=out.simout5;
+Ym6=out.simout6;
+
+t=out.tout;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
