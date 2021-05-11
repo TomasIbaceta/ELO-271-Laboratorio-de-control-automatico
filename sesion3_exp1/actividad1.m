@@ -24,6 +24,7 @@ for i=[1:4]
     stem(Ym{i}.time,Ym{i}.data)
     plot(t,Yr{i})
     hold off
+    legend('Y', 'Ym', 'Yr')
 end
 
 %%
