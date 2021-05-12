@@ -98,7 +98,6 @@ end
 %-------------respuesta en frecuencia
 
 t1=linspace(0,30,30001);
-
 bode(G_c(1));
 
 %------------------entrada 1
@@ -106,13 +105,13 @@ bode(G_c(1));
 u1abs=abs(A1); u1fase=angle(A1); %
 y_m_1=10*u1abs*sin(3*t1+u1fase); %stationary output of the system
 %------------------entrada 2
-[A2,B2]=freqresp(G_c(1),3);
+[A2,B2]=freqresp(G_c(1),0);
 u2abs=abs(A2); u2fase=angle(A2);
-y_m_2=10*( u2abs*sin(u2fase)  +  u1abs*sin(3*t1+u1fase))
+y_m_2=10*( u2abs*cos(u2fase)  +  u1abs*sin(3*t1+u1fase));
 %------------------entrada 3
 [A3,B3]=freqresp(G_c(1),10);
 u3abs=abs(A3); u3fase=angle(A3);
-y_m_3=10*u3abs*sin(10*t1+u3fase)
+y_m_3=10*u3abs*sin(10*t1+u3fase);
 
 sys = G_c(1);
 out = sim('sesion2_act2'); %run the simulation
