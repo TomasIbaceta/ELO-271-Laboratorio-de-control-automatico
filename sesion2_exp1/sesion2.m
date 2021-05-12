@@ -96,34 +96,53 @@ end
 
 
 %-------------respuesta en frecuencia
-% 
-% t1=linspace(0,30,30001);
-% 
-% bode(G_c(1));
-% 
-% %------------------entrada 1
-% [A1,B1]=freqresp(G_c(1),3)
-% u1abs=abs(A1); u1fase=angle(A1); %
-% y_m_1=10*u1abs*sin(3*t1+u1fase); %stationary output of the system
-% %------------------entrada 2
-% [A2,B2]=freqresp(G_c(1),0);
-% u2abs=abs(A2); u2fase=angle(A2);
-% %Yest=10( u2abs*sin(u2fase)  +  u1abs*sin(3*t+u1fase))
-% %------------------entrada 3
-% [A3,B3]=freqresp(G_c(1),10);
-% u3abs=abs(A3); u3fase=angle(A3);
-% %Yest=10*u3abs*sin(10*t+u3fase)
-% 
-% sys = G_c(1);
-% out = sim('sesion2_act2'); %run the simulation
-% 
-% y1 = out.y1;
-% y2 = out.y2;
-% y3 = out.y3;
-% 
-% figure(2)
-% plot(t1,y1)
-% hold on
-% plot(t1,y_m_1)
-% legend("y1sim", "ym1")
+
+t1=linspace(0,30,30001);
+
+bode(G_c(1));
+
+%------------------entrada 1
+[A1,B1]=freqresp(G_c(1),3)
+u1abs=abs(A1); u1fase=angle(A1); %
+y_m_1=10*u1abs*sin(3*t1+u1fase); %stationary output of the system
+%------------------entrada 2
+[A2,B2]=freqresp(G_c(1),3);
+u2abs=abs(A2); u2fase=angle(A2);
+y_m_2=10*( u2abs*sin(u2fase)  +  u1abs*sin(3*t1+u1fase))
+%------------------entrada 3
+[A3,B3]=freqresp(G_c(1),10);
+u3abs=abs(A3); u3fase=angle(A3);
+y_m_3=10*u3abs*sin(10*t1+u3fase)
+
+sys = G_c(1);
+out = sim('sesion2_act2'); %run the simulation
+
+y1 = out.y1;
+y2 = out.y2;
+y3 = out.y3;
+
+figure(2)
+subplot(3,1,1)
+plot(t1,y1)
+hold on
+plot(t1,y_m_1)
+legend("y_1 Euler \Delta=10^{-3}", "y_1 ")
+title('Respuesta del sistema con la entrada u_1')
+
+subplot(3,1,2)
+
+plot(t1,y2)
+hold on
+plot(t1,y_m_2)
+legend("y_2 Euler \Delta=10^{-3}" , "y_2")
+title('Respuesta del sistema con la entrada u_2')
+
+
+subplot(3,1,3)
+
+plot(t1,y3)
+hold on
+plot(t1,y_m_3)
+legend("y_3 Euler \Delta=10^{-3}", "y_3 ")
+title('Respuesta del sistema con la entrada u_3')
 
