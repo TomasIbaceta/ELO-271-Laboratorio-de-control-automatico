@@ -69,14 +69,13 @@ datos={0,0,0,0,0}; %Saves the output characteristics, is preallocated for extra 
 
 for i = [1 : length(a1) ]
     %2.3
-    titulo='Respuesta a Escalon para Caso: ' + string(i);
-    h(i)=subplot(3,2,i);
+    titulo='Respuesta a impulso para Caso:' + string(i);
+    subplot(3,2,i);
     plot(step(G_c(i)))
-    if (i == 5) % Trucazo para poner el último gráfico al medio.
-        pos = get(h,'Position');
-        new = mean(cellfun(@(v)v(1),pos(1:2)));
-        set(h(i),'Position',[new,pos{end}(2:end)])
-    end
+    if i == 5
+    pos = get(G_,'Position');
+    new = mean(cellfun(@(v)v(1),pos(1:2)));
+    set(h(5),'Position',[new,pos{end}(2:end)])
     title(titulo)
     
 % %     2.4 
