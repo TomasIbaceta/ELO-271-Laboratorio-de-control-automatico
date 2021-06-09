@@ -1,4 +1,6 @@
 %%  Basics
+
+%df
 %------------ EXTRAS
 %pwd %gives the current working directory
 %cd C:\\ %goes to a different working directory
