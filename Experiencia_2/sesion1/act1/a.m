@@ -1,7 +1,20 @@
+
+
+
+
+
+out = sim('actividad2');
+a1=0.15;
+a2=0.2;
+b1=0.3;
+b2=0.5;
+
+v1=out.v1;
+v2=out.v2;
+
+h1=(v1.data-b1)/a1;
+h2=(v2.data-b2)/b2;
+
 %Metodo de mínimos cuadrados
-phi = [u1_k u2_k];
-%Theta = vpa(pinv(phi) * y_k) %para usar mas decimales %metodo usando pinv
-Theta = pinv(phi) * y_k
-Theta2 = vpa(inv(transpose(phi)*phi) * transpose(phi) * y_k); %metodo manual
-a_ls = Theta(1,1);
-b_ls = Theta(2,1);
+phi = [v1.time ones(length(v1.data),1)];
+Theta = vpa(pinv(phi) * sqrt(h1-h2)) %para usar mas decimales %metodo usando pinv
