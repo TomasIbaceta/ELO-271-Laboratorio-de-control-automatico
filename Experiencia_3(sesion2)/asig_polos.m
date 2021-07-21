@@ -16,8 +16,8 @@ C=(s+100)*(s+25)*(P_(1)*s+P_(2))/(s^3+L_(2)*s^2+L_(3)*s)
  
 %el valor a es C(infinito)
 
-a=evalfr(C,inf);
-Cae=(C^-1)-(1/a); 
+a=evalfr(C,inf)
+Cae=(C^-1)-(1/a) 
 
 % conociendo el valor de a y y cae, usted puede implementar el esquema de
 % antienrrollamiento sin problemas :)
